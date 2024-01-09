@@ -9,7 +9,7 @@ import { targets_kv, TARGET_FILES, TARGET_CONST_PY_PATH } from "./targets.js"
 const replace_version_url = (s) =>
     s.replace(
         /URL_HASSIO_VERSION\s*=\s*"([^"]+)"/,
-        `URL_HASSIO_VERSION = ${targets_kv.get("URL_HASSIO_VERSION")}`
+        `URL_HASSIO_VERSION = "${targets_kv.get("URL_HASSIO_VERSION")}"`
     )
 
 /**
@@ -20,7 +20,7 @@ const replace_version_url = (s) =>
 const replace_apparmor_url = (s) =>
     s.replace(
         /URL_HASSIO_APPARMOR\s*=\s*"([^"]+)"/,
-        `URL_HASSIO_APPARMOR = ${targets_kv.get("URL_HASSIO_APPARMOR")}`
+        `URL_HASSIO_APPARMOR = "${targets_kv.get("URL_HASSIO_APPARMOR")}"`
     )
 
 /**
