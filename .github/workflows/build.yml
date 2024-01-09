@@ -148,13 +148,11 @@ jobs:
         run: |
           cosign sign-blob --yes rootfs/supervisor.sha256 --bundle rootfs/supervisor.sha256.sig
 
-      - name: Login to GitHub Container Registry
-        if: needs.init.outputs.publish == 'true'
-        uses: docker/login-action@v3.0.0
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
         with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Set build arguments
         if: needs.init.outputs.publish == 'false'
@@ -168,7 +166,5 @@ jobs:
             --${{ matrix.arch }} \
             --target /data \
             --cosign \
-            --docker-hub herberthe \
+            --docker-hub herberthe0229 \
             --generic ${{ needs.init.outputs.version }}
-        # env:
-          # CAS_API_KEY: ${{ secrets.CAS_TOKEN }}
