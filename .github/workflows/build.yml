@@ -76,7 +76,6 @@ jobs:
       - name: Remove conflict files
         run: |
           rm -rf .github
-          rm LICENSE
           rm README.md
           rm .gitignore
 
