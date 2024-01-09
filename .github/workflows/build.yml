@@ -92,6 +92,10 @@ jobs:
       - name: Run Adaption
         run: |
           yarn adapt
+      
+      - name: Adapt building
+        run: |
+          cp -r ./raw_source ./
 
       - name: Write env-file
         if: needs.init.outputs.requirements == 'true'
