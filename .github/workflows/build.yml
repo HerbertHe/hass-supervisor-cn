@@ -168,6 +168,7 @@ jobs:
             --${{ matrix.arch }} \
             --target /data \
             --cosign \
+            --docker-hub herberthe \
             --generic ${{ needs.init.outputs.version }}
         # env:
           # CAS_API_KEY: ${{ secrets.CAS_TOKEN }}
