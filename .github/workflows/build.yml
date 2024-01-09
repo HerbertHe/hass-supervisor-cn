@@ -76,8 +76,9 @@ jobs:
       - name: Remove conflict files
         run: |
           rm -rf .github
-          rm README.md
-          rm .gitignore
+          rm ./LICENSE
+          rm ./README.md
+          rm ./.gitignore
 
       - name: Checkout
         uses: actions/checkout@v4
