@@ -10,7 +10,11 @@ const TARGET_HOMEASSISTANT_MODULE_PY_PATH = path.join(
     "module.py"
 )
 
-const TARGET_PLUGINS_BASE_PY_PATH = (SUPERVISOR_PATH, "plugins", "base.py")
+const TARGET_PLUGINS_BASE_PY_PATH = path.join(
+    SUPERVISOR_PATH,
+    "plugins",
+    "base.py"
+)
 
 export const TARGET_FILES = [
     TARGET_HOMEASSISTANT_MODULE_PY_PATH,
