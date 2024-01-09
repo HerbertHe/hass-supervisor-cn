@@ -90,7 +90,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
 
-      - name: Run adaption
+      - name: Run Adaption
         run: |
           yarn adapt
 

@@ -8,6 +8,7 @@ import { replace_const_url_with_write, replace_hard_code_url_with_write } from "
  * @returns 
  */
 const is_raw_source_existed = () => {
+    console.log(RAW_SOURCE_PATH)
     return fs.existsSync(RAW_SOURCE_PATH)
 }
 
