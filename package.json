@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
+  "scripts": {
+    "adapt": "node ./index.js"
+  },
   "repository": "git@github.com:HerbertHe/hass-supervisor-cn.git",
   "author": "HerbertHe <Herbert.He0229@gmail.com>",
   "license": "MIT",
