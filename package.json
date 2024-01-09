@@ -1,0 +1,12 @@
+{
+  "name": "hass-supervisor-cn",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "repository": "git@github.com:HerbertHe/hass-supervisor-cn.git",
+  "author": "HerbertHe <Herbert.He0229@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "zx": "^7.2.3"
+  }
+}
