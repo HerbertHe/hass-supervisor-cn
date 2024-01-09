@@ -15,7 +15,16 @@ jobs:
                 # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
         steps:
-            - uses: actions/checkout@v3
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Checkout supervisor
+              uses: actions/checkout@v3
+              with:
+                  repository: "home-assistant/supervisor"
+                  ref: "main"
+                  path: "./raw_source"
+
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v3
               with:

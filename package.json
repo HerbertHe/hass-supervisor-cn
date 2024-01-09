@@ -9,7 +9,5 @@
   "repository": "git@github.com:HerbertHe/hass-supervisor-cn.git",
   "author": "HerbertHe <Herbert.He0229@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "zx": "^7.2.3"
-  }
+  "dependencies": {}
 }
