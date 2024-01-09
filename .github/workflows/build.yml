@@ -73,9 +73,13 @@ jobs:
         node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
-      - name: Remove conflict files
-        run: |
-          rm -rf .github
+      - name: Checkout supervisor repo
+        uses: actions/checkout@v4
+        with:
+          repository: "home-assistant/supervisor"
+          ref: "main"
+          fetch-depth: 0
+          path: "./raw_source"
 
       - name: Checkout
         uses: actions/checkout@v4
