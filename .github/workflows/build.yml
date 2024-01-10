@@ -5,6 +5,11 @@ name: Build Supervisor
 on:
   push:
     branches: ["main"]
+    paths:
+      - ".github/**"
+      - index.js
+      - package.json
+      - "scripts/**"
   pull_request:
     branches: ["main"]
 
