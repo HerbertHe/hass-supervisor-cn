@@ -4,5 +4,5 @@ WIP 试图解决中国大陆使用 home assistant supervisor 的网络挑战问�
 
 ## Roadmap
 
-- [ ] 重建 supervisor 构建 actions
+- [x] 重建 supervisor 构建 actions
 - [x] 处理 supervisor 项目中的上游链接依赖

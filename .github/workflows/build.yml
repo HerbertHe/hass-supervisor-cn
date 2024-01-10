@@ -1,6 +1,6 @@
 name: Build Supervisor
 
-# See homeassistant/supervisor
+# See https://github.com/home-assistant/supervisor/blob/main/.github/workflows/builder.yml
 
 on:
   push:
@@ -34,7 +34,6 @@ jobs:
       publish: ${{ steps.version.outputs.publish }}
       requirements: ${{ steps.requirements.outputs.changed }}
     steps:
-      # 获取远端仓库 -> raw_source，做共存处理
       - name: Checkout supervisor repo
         uses: actions/checkout@v4
         with:
