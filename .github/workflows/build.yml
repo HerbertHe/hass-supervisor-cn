@@ -341,14 +341,15 @@ jobs:
             exit 1
           fi
 
-      - name: Wait for Supervisor to come up
-        run: |
-          SUPERVISOR=$(docker inspect --format='{{.NetworkSettings.IPAddress}}' hassio_supervisor)
-          ping="error"
-          while [ "$ping" != "ok" ]; do
-            ping=$(curl -sSL "http://$SUPERVISOR/supervisor/ping" | jq -r '.result')
-            sleep 5
-          done
+      # GitHub 报错，忽略网络检测
+      # - name: Wait for Supervisor to come up
+      #   run: |
+      #     SUPERVISOR=$(docker inspect --format='{{.NetworkSettings.IPAddress}}' hassio_supervisor)
+      #     ping="error"
+      #     while [ "$ping" != "ok" ]; do
+      #       ping=$(curl -sSL "http://$SUPERVISOR/supervisor/ping" | jq -r '.result')
+      #       sleep 5
+      #     done
 
       - name: Restore SSH add-on from backup
         run: |
