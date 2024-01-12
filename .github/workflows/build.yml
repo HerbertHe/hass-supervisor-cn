@@ -3,6 +3,23 @@ name: Build Supervisor
 # See https://github.com/home-assistant/supervisor/blob/main/.github/workflows/builder.yml
 
 on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: "Channel"
+        required: true
+        default: "dev"
+      version:
+        description: "Version"
+        required: true
+      publish:
+        description: "Publish"
+        required: true
+        default: "false"
+      stable:
+        description: "Stable"
+        required: true
+        default: "false"
   push:
     branches: ["main"]
     paths:
@@ -251,6 +268,8 @@ jobs:
       #       ping=$(curl -sSL "http://$SUPERVISOR/supervisor/ping" | jq -r '.result')
       #       sleep 5
       #     done
+
+      # 还缺少了 hassio_cli 这个容器！
 
       - name: Check the Supervisor
         run: |
