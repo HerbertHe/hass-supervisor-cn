@@ -32,7 +32,7 @@ jobs:
       version: ${{ steps.version.outputs.version }}
       channel: ${{ steps.version.outputs.channel }}
       publish: ${{ steps.version.outputs.publish }}
-      requirements: ${{ steps.requirements.outputs.changed }}
+      # requirements: ${{ steps.requirements.outputs.changed }}
     steps:
       - name: Checkout supervisor repo
         uses: actions/checkout@v4
@@ -51,17 +51,17 @@ jobs:
         with:
           type: ${{ env.BUILD_TYPE }}
 
-      - name: Get changed files
-        id: changed_files
-        if: steps.version.outputs.publish == 'false'
-        uses: masesgroup/retrieve-changed-files@v3.0.0
+      # - name: Get changed files
+      #   id: changed_files
+      #   if: steps.version.outputs.publish == 'false'
+      #   uses: masesgroup/retrieve-changed-files@v3.0.0
 
-      - name: Check if requirements files changed
-        id: requirements
-        run: |
-          if [[ "${{ steps.changed_files.outputs.all }}" =~ (requirements.txt|build.json) ]]; then
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
+      # - name: Check if requirements files changed
+      #   id: requirements
+      #   run: |
+      #     if [[ "${{ steps.changed_files.outputs.all }}" =~ (requirements.txt|build.json) ]]; then
+      #       echo "changed=true" >> "$GITHUB_OUTPUT"
+      #     fi
 
   adapt:
     name: Adapt ${{ matrix.arch }} supervisor
@@ -101,26 +101,26 @@ jobs:
         run: |
           cp -r ./raw_source/* ./
 
-      - name: Write env-file
-        if: needs.init.outputs.requirements == 'true'
-        run: |
-          (
-              # Fix out of memory issues with rust
-              echo "CARGO_NET_GIT_FETCH_WITH_CLI=true"
-          ) > .env_file
+      # - name: Write env-file
+      #   if: needs.init.outputs.requirements == 'true'
+      #   run: |
+      #     (
+      #         # Fix out of memory issues with rust
+      #         echo "CARGO_NET_GIT_FETCH_WITH_CLI=true"
+      #     ) > .env_file
 
-      - name: Build wheels
-        if: needs.init.outputs.requirements == 'true'
-        uses: home-assistant/wheels@2023.10.5
-        with:
-          abi: cp311
-          tag: musllinux_1_2
-          arch: ${{ matrix.arch }}
-          wheels-key: ${{ secrets.WHEELS_KEY }}
-          apk: "libffi-dev;openssl-dev;yaml-dev"
-          skip-binary: aiohttp
-          env-file: true
-          requirements: "requirements.txt"
+      # - name: Build wheels
+      #   if: needs.init.outputs.requirements == 'true'
+      #   uses: home-assistant/wheels@2023.10.5
+      #   with:
+      #     abi: cp311
+      #     tag: musllinux_1_2
+      #     arch: ${{ matrix.arch }}
+      #     wheels-key: ${{ secrets.WHEELS_KEY }}
+      #     apk: "libffi-dev;openssl-dev;yaml-dev"
+      #     skip-binary: aiohttp
+      #     env-file: true
+      #     requirements: "requirements.txt"
 
       - name: Set version
         if: needs.init.outputs.publish == 'true'
@@ -242,14 +242,15 @@ jobs:
       - name: Start the Supervisor
         run: docker start hassio_supervisor
 
-      - name: Wait for Supervisor to come up
-        run: |
-          SUPERVISOR=$(docker inspect --format='{{.NetworkSettings.IPAddress}}' hassio_supervisor)
-          ping="error"
-          while [ "$ping" != "ok" ]; do
-            ping=$(curl -sSL "http://$SUPERVISOR/supervisor/ping" | jq -r '.result')
-            sleep 5
-          done
+      # 实测没有 .NetworkSettings.IPAddress 的值
+      # - name: Wait for Supervisor to come up
+      #   run: |
+      #     SUPERVISOR=$(docker inspect --format='{{.NetworkSettings.IPAddress}}' hassio_supervisor)
+      #     ping="error"
+      #     while [ "$ping" != "ok" ]; do
+      #       ping=$(curl -sSL "http://$SUPERVISOR/supervisor/ping" | jq -r '.result')
+      #       sleep 5
+      #     done
 
       - name: Check the Supervisor
         run: |
@@ -341,14 +342,14 @@ jobs:
             exit 1
           fi
 
-      - name: Wait for Supervisor to come up
-        run: |
-          SUPERVISOR=$(docker inspect --format='{{.NetworkSettings.IPAddress}}' hassio_supervisor)
-          ping="error"
-          while [ "$ping" != "ok" ]; do
-            ping=$(curl -sSL "http://$SUPERVISOR/supervisor/ping" | jq -r '.result')
-            sleep 5
-          done
+      # - name: Wait for Supervisor to come up
+      #   run: |
+      #     SUPERVISOR=$(docker inspect --format='{{.NetworkSettings.IPAddress}}' hassio_supervisor)
+      #     ping="error"
+      #     while [ "$ping" != "ok" ]; do
+      #       ping=$(curl -sSL "http://$SUPERVISOR/supervisor/ping" | jq -r '.result')
+      #       sleep 5
+      #     done
 
       - name: Restore SSH add-on from backup
         run: |
